@@ -1,16 +1,16 @@
 ## To this project I am using next instruments:
-1)React
-2)React-router-dom
-3)Axios
-4)Firebase
-5)Bootstrap css
+1)React<br />
+2)React-router-dom<br />
+3)Axios<br />
+4)Firebase<br />
+5)Bootstrap css<br />
 
 ## I try to realize next functions of app:
-1)Add todo item to list
-2)Remove items from list
-3)Autentifications of users
-4)Routing 
-5)Saving data about todo item in database
+1)Add todo item to list<br />
+2)Remove items from list<br />
+3)Autentifications of users<br />
+4)Routing <br />
+5)Saving data about todo item in database<br />
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
