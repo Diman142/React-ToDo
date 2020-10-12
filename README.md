@@ -1,11 +1,11 @@
-To this project I am using next instruments:
+## To this project I am using next instruments:
 1)React
 2)React-router-dom
 3)Axios
 4)Firebase
 5)Bootstrap css
 
-I try to realize next functions of app:
+## I try to realize next functions of app:
 1)Add todo item to list
 2)Remove items from list
 3)Autentifications of users
