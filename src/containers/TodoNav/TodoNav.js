@@ -1,26 +1,44 @@
 import React, { Component } from 'react'
 import classes from './TodoNav.module.css'
+import {NavLink} from 'react-router-dom'
+
+
+const links = [
+  {path: '/', title: 'Authentication', exact: true},
+  {path: '/addToDo', title: 'Add-ToDo', exact: false},
+  {path: '/TodoList', title: 'ToDo-List', exact: false},
+  {path: '#', title: 'About', exact: false},
+]
 
 class TodoNav extends Component {
+
+  renderLinks(){
+    return links.map((item, index) => {
+      return (
+        <li className="nav-item" key={index + item.title}>
+        <NavLink 
+        className="nav-link" 
+        to={item.path}
+        exact={item.exact}
+        activeClassName="active"
+        >
+        {item.title}<span className="sr-only">(current)</span>
+        </NavLink>
+        </li>
+      )
+    })
+
+  }
+
+
   render() {
     return (
       <div className={classes.Todo}>
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">TODO-List</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          <a className="navbar-brand" href="/">TODO-List</a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">ToDo-List</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">About App</a>
-              </li>
+              {this.renderLinks()}
             </ul>
           </div>
         </nav>

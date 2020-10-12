@@ -45,6 +45,7 @@ class AddTodo extends Component {
   render() {
     return (
     <form className={classes.form} onSubmit={this.submitHandler}>
+      <h2 className="text-center">Add your ToDos</h2>
       <div className="form-group">
         <label htmlFor="formGroupExampleInput">Task Header</label>
         <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Task Header" value={this.state.headerValue} onChange={this.changeHeadHandler} required/>

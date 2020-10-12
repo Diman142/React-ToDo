@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {TodoItem} from '../TodoItem/TodoItem'
 
 export class TodoList extends Component {
   constructor(props) {
@@ -10,30 +11,41 @@ export class TodoList extends Component {
     }
   }
 
+  getItem(items){
+    if(items.length){
+      return items.map((item, index) => {
+        return <TodoItem header = {item.header} descr = {item.descr} key={index + item.header}/>
+      }) 
+    } else {
+      return <div>Задачи отсутствуют</div>
+    }
+  }
+
   async componentDidMount() {
-    console.log(1)
     try {
       const response = await axios.get('https://react-todo-b0a36.firebaseio.com/task.json')
-
       const items = []
-
-      Object.keys(response.data).forEach((key) => {
-        items.push(response.data[key])
-      })
+      
+      if(response.data){
+        Object.keys(response.data).forEach((key) => {
+          items.push(response.data[key])
+        })
+      }
+    
       this.setState({ items })
-      console.log(this.state.items)
     } catch (e) {
       console.error(e)
     }
   }
 
-  render() {
+  
 
+  render() {
     return (
       <div>
-        <h2>Task List</h2>
-        <ul>
-
+        <h2 className="mt-4 text-center">Todo-List</h2>
+        <ul className="pl-0 row">
+          {this.getItem(this.state.items)}
         </ul>
       </div>
     )
