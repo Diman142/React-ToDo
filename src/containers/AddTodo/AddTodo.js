@@ -3,7 +3,6 @@ import classes from './AddTodo.module.css'
 import axios from 'axios'
 
 
-let counter = 0;
 class AddTodo extends Component {
 
   constructor(props) {
@@ -21,10 +20,9 @@ class AddTodo extends Component {
   submitHandler(event){
     event.preventDefault();
     let data = {};
-    counter++;
     data.header = this.state.headerValue; 
     data.descr = this.state.descrValue;
-    data.id = counter;
+    data.id = +new Date();
     axios.post('https://react-todo-b0a36.firebaseio.com/task.json', data)
     .then((response) => {console.log(response)})
     .catch((error) => {console.error(error)})
