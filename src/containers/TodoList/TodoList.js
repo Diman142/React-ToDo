@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {TodoItem} from '../TodoItem/TodoItem'
+import {Loader} from '../../components/Loader/Loader'
 
 export class TodoList extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export class TodoList extends Component {
 
     this.state = {
       items: [],
+      loading: true,
     }
 
     this.deleteHandler = this.deleteHandler.bind(this)
@@ -26,7 +28,7 @@ export class TodoList extends Component {
         })
       }
     
-      this.setState({ items })
+      this.setState({ items, loading: false})
     } catch (e) {
       console.error(e)
     }
@@ -34,16 +36,6 @@ export class TodoList extends Component {
 
   deleteHandler(items){
     this.setState({items: items})
-  //   console.log(this.state.ie)
-  //   if(this.state.items.length){
-  //     let itemData = [...this.state.items]
-  //     itemData = itemData.map((item) => {
-  //       if(+item.id !== +id){
-  //         return item
-  //       }
-  //     })
-  //     console.log(itemData)
-  // }
   }
 
 getItem(items){
@@ -63,9 +55,12 @@ getItem(items){
     return (
       <div>
         <h2 className="mt-4 text-center">Todo-List</h2>
-        <ul className="pl-0 row">
-          {this.getItem(this.state.items)}
-        </ul>
+        {
+          this.state.loading ? <Loader/>
+          : <ul className="pl-0 row">
+              {this.getItem(this.state.items)}
+            </ul>
+        }
       </div>
     )
   }
