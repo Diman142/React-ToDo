@@ -149,7 +149,7 @@ export class Auth extends Component {
       })
       .then(response => {
         console.log(response.data)
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 10)
    
         localStorage.setItem('token', response.data.idToken)
         localStorage.setItem('expirationDate', expirationDate)
@@ -164,9 +164,13 @@ export class Auth extends Component {
 
   resetAuth(){
     let time = new Date(localStorage.getItem('expirationDate')) - new Date()
-    console.log(time)
-    setInterval(() => {
-      this.timerAuthFunction()
+    let timerId = setInterval(() => {
+      let token = localStorage.getItem('token')
+      if(!token){
+        clearInterval(timerId)
+      } else{
+        this.timerAuthFunction()
+      }
     }, time)
   }
 
@@ -184,7 +188,7 @@ export class Auth extends Component {
       formControls.email.value = ""
       formControls.password.value = ""
 
-      const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+      const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 10)
      
       localStorage.setItem('token', response.data.idToken)
       localStorage.setItem('userId', response.data.localId)

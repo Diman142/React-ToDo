@@ -3,6 +3,7 @@ import axios from 'axios'
 import {TodoItem} from '../TodoItem/TodoItem'
 import {Loader} from '../../components/Loader/Loader'
 
+
 export class TodoList extends Component {
   constructor(props) {
     super(props)
@@ -10,10 +11,18 @@ export class TodoList extends Component {
     this.state = {
       items: [],
       loading: true,
+      isModalOpen: false,
     }
 
     this.deleteHandler = this.deleteHandler.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
+
+
+  toggleModal(){
+    this.setState({isModalOpen: !this.state.isModalOpen})
+  }
+
 
 
 
@@ -43,7 +52,7 @@ export class TodoList extends Component {
 getItem(items){
   if(items.length){
     return items.map((item, index) => {
-      return <TodoItem header = {item.header} descr = {item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items}/>
+      return <TodoItem header = {item.header} descr = {item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items} toggleModal={this.toggleModal}/>
     }) 
   } else {
     return <div>Задачи отсутствуют</div>
@@ -65,3 +74,7 @@ getItem(items){
     )
   }
 }
+
+
+
+

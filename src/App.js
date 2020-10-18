@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Route, Switch} from "react-router-dom";
 import Layout from './hoc/layout/layout'
 import TodoNav from './containers/TodoNav/TodoNav'
@@ -16,7 +16,6 @@ function App() {
     let token = localStorage.getItem('token')
     setToken({token: token})
   }
-
 
   let routes =  (
     <Switch>
