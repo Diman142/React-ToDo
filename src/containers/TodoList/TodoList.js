@@ -19,9 +19,11 @@ export class TodoList extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get('https://react-todo-b0a36.firebaseio.com/task.json')
+      let userId = localStorage.getItem('userId')
+      let token = localStorage.getItem('token')
+      console.log(token)
+      const response = await axios.get(`https://react-todo-b0a36.firebaseio.com/${userId}.json?auth=${token}`)
       const items = []
-      
       if(response.data){
         Object.keys(response.data).forEach((key) => {
           items.push(response.data[key])
@@ -47,8 +49,6 @@ getItem(items){
     return <div>Задачи отсутствуют</div>
   }
 }
-
-  
 
   render() {
     // console.log(this.state.items)

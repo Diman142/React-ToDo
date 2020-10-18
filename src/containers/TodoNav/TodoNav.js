@@ -10,24 +10,48 @@ const links = [
   {path: '#', title: 'About', exact: false},
 ]
 
+const linksNotToken = [
+  {path: '/', title: 'Authentication', exact: true},
+  {path: '#', title: 'About', exact: false},
+]
+
 class TodoNav extends Component {
+  constructor(props){
+    super(props)
+  }
 
   renderLinks(){
-    return links.map((item, index) => {
-      return (
-        <li className="nav-item" key={index + item.title}>
-        <NavLink 
-        className="nav-link" 
-        to={item.path}
-        exact={item.exact}
-        activeClassName="active"
-        >
-        {item.title}<span className="sr-only">(current)</span>
-        </NavLink>
-        </li>
-      )
-    })
-
+    if(this.props.token){
+      return links.map((item, index) => {
+        return (
+          <li className="nav-item" key={index + item.title}>
+          <NavLink 
+          className="nav-link" 
+          to={item.path}
+          exact={item.exact}
+          activeClassName="active"
+          >
+          {item.title}<span className="sr-only">(current)</span>
+          </NavLink>
+          </li>
+        )
+      })
+    } else {
+      return linksNotToken.map((item, index) => {
+        return (
+          <li className="nav-item" key={index + item.title}>
+          <NavLink 
+          className="nav-link" 
+          to={item.path}
+          exact={item.exact}
+          activeClassName="active"
+          >
+          {item.title}<span className="sr-only">(current)</span>
+          </NavLink>
+          </li>
+        )
+      })
+    }
   }
 
 

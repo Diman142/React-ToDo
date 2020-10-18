@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './TodoItem.module.css'
 import axios from 'axios'
 
-const url = 'https://react-todo-b0a36.firebaseio.com/task/';
+
 export function TodoItem(props) {
   const [disabledBtn, setDisabledBtn] = useState(true)
 
@@ -31,10 +31,13 @@ export function TodoItem(props) {
     }
   }
 
-  async function deleteItem(event, url){
+  async function deleteItem(event){
     let parent = event.target.parentNode;
     changeState(parent.id);
-    const response = await axios.get(`${url}.json`)
+    let userId = localStorage.getItem('userId')
+    let token = localStorage.getItem('token')
+    const url = `https://react-todo-b0a36.firebaseio.com/${userId}/`;
+    const response = await axios.get(`${url}.json?auth=${token}`)
     try{
       let deleteKey = ""
       let keys = Object.keys(response.data)
@@ -43,7 +46,7 @@ export function TodoItem(props) {
            deleteKey = item
         }
       })
-      const deleteResp = await axios.delete(`${url+deleteKey}.json`)
+      const deleteResp = await axios.delete(`${url+deleteKey}.json?auth=${token}`)
       alert('Задача удалена')
     } catch(e){
       console.error(e)
@@ -51,14 +54,13 @@ export function TodoItem(props) {
   }
 
   return (
-    
     <li style={{listStyle: 'none'}} className="card-body col-lg-4 mt-2 position-relative" id={props.id}>
       <h5 className="card-title">{props.header}</h5>
       <p className="card-text">{props.descr}</p>
       <p className="card-text"><small className="text-muted">Срок выполнения: {"не указан"}</small></p>
       <button className="btn btn-primary mr-2" onClick={completeTask} disabled={!disabledBtn}>Завершить</button>
       <button style={{backgroundColor: "red"}} className="btn btn-danger" onClick={backTask} disabled={disabledBtn}>Вернуться</button>
-      <button type="button" className={`close ${classes.closeTodo}`} aria-label="Close" onClick={(event) => {deleteItem(event, url)}}>&times;</button>
+      <button type="button" className={`close ${classes.closeTodo}`} aria-label="Close" onClick={(event) => {deleteItem(event)}}>&times;</button>
     </li>
   )
 }
