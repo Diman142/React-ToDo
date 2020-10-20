@@ -7,10 +7,13 @@ import {TodoList} from './containers/TodoList/TodoList'
 import {Auth} from './containers/Auth/Auth'
 import {AlertContext ,alerts} from './context/AlertContext/AlertContext'
 import {Logout} from './components/Logout/Logout'
+import {About} from './containers/About/About'
+
+
 
 function App() {
 
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(null)
 
   function changeToken(){
     let token = localStorage.getItem('token')
@@ -19,6 +22,7 @@ function App() {
 
   let routes =  (
     <Switch>
+      <Route path="/About" component={About}/>
       <Route path="/" render={(props) => (
         <Auth {...props} token={token} changeToken={changeToken}/>
       )} />
@@ -30,9 +34,11 @@ function App() {
       <Switch>
         <Route path="/addToDo" component={AddTodo}/>
         <Route path="/TodoList" component={TodoList}/>
+        <Route path="/About" component={About}/>
         <Route path="/" render={(props) => (
         <Auth {...props} token={token} changeToken={changeToken}/>
-        )} />
+        )}/>
+       
       </Switch>
     )
   }

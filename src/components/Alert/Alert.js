@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {AlertContext} from '../../context/AlertContext/AlertContext'
 
 import './Alert.module.css'
 
 export class Alert extends Component {
-  constructor(props){
-    super(props)
 
-  }
   render(){
     console.log(this.props)
     // let props = this.props

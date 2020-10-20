@@ -31,6 +31,18 @@ export const alerts = {
         type: 'alert-danger', 
         text: 'Ошибка авторизации, попробуйте ещё раз!'
     },
+
+    deleteSucces: {
+        type: 'alert-success',
+        text: 'Задача успешно удалена'
+    },
+
+    deleteFailure: {
+        type: 'alert-warning',
+        text: 'Не удалось удалить задачу проверьте подключение к сети'
+    }
+
+
 }
 
 export const AlertContext = React.createContext();

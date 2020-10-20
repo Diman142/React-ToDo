@@ -23,6 +23,7 @@ export class Auth extends Component {
       regFailure: false,
       authSuccess: false,
       authFailure: false,
+      startAuth: true,
       formControls: {
         email: {
           value: '',
@@ -136,8 +137,6 @@ export class Auth extends Component {
   }
 
   timerAuthFunction = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('expirationDate')
     let email = localStorage.getItem('userEmail')
     let password = localStorage.getItem('userPassword')
 
@@ -149,8 +148,9 @@ export class Auth extends Component {
       })
       .then(response => {
         console.log(response.data)
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 10)
-   
+        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationDate')
         localStorage.setItem('token', response.data.idToken)
         localStorage.setItem('expirationDate', expirationDate)
 
@@ -161,6 +161,7 @@ export class Auth extends Component {
       return null
     }
   }
+
 
   resetAuth(){
     let time = new Date(localStorage.getItem('expirationDate')) - new Date()
@@ -188,7 +189,7 @@ export class Auth extends Component {
       formControls.email.value = ""
       formControls.password.value = ""
 
-      const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 10)
+      const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
      
       localStorage.setItem('token', response.data.idToken)
       localStorage.setItem('userId', response.data.localId)
@@ -300,8 +301,12 @@ export class Auth extends Component {
 
 
   render() {
+   
     return (
-       this.getForm()
+      <div>
+          {this.getForm()}
+      </div>
+     
     )
   }
 }

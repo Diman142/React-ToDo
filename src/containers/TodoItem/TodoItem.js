@@ -26,9 +26,12 @@ export function TodoItem(props) {
       itemData = itemData.filter(item => {
           if(+item.id !== +id){
             return item
-          }
+          } 
       })
       props.deleteHandler(itemData)
+    }
+    else{
+      return null
     }
   }
 
@@ -47,10 +50,11 @@ export function TodoItem(props) {
            deleteKey = item
         }
       })
-      const deleteResp = await axios.delete(`${url+deleteKey}.json?auth=${token}`)
-      alert('Задача удалена')
+      await axios.delete(`${url+deleteKey}.json?auth=${token}`)
+      props.toggleAlertSuccess()
     } catch(e){
       console.error(e)
+      props.toggleAlertFailure()
     }
   }
 

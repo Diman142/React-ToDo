@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import classes from './AddTodo.module.css'
 import axios from 'axios'
 import {Loader} from '../../components/Loader/Loader'
-import {AlertContext, alerts} from '../../context/AlertContext/AlertContext'
+import {AlertContext} from '../../context/AlertContext/AlertContext'
 import {Alert} from '../../components/Alert/Alert'
 
 

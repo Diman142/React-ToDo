@@ -7,18 +7,15 @@ const links = [
   {path: '/', title: 'Authentication', exact: true},
   {path: '/addToDo', title: 'Add-ToDo', exact: false},
   {path: '/TodoList', title: 'ToDo-List', exact: false},
-  {path: '#', title: 'About', exact: false},
+  {path: '/About', title: 'About', exact: false},
 ]
 
 const linksNotToken = [
   {path: '/', title: 'Authentication', exact: true},
-  {path: '#', title: 'About', exact: false},
+  {path: '/About', title: 'About', exact: false},
 ]
 
 class TodoNav extends Component {
-  constructor(props){
-    super(props)
-  }
 
   renderLinks(){
     if(this.props.token){
