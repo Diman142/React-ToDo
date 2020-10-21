@@ -147,7 +147,6 @@ export class Auth extends Component {
         returnSecureToken: true
       })
       .then(response => {
-        console.log(response.data)
         const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
         localStorage.removeItem('token')
         localStorage.removeItem('expirationDate')
@@ -184,7 +183,6 @@ export class Auth extends Component {
     localStorage.setItem('userPassword', userData.password)
     axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, userData)
     .then((response) => {
-      console.log(response)
       let formControls = this.state.formControls;
       formControls.email.value = ""
       formControls.password.value = ""
@@ -195,6 +193,7 @@ export class Auth extends Component {
       localStorage.setItem('userId', response.data.localId)
       localStorage.setItem('expirationDate', expirationDate)
 
+      
 
       this.props.changeToken()
       this.resetAuth()

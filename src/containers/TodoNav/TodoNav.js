@@ -3,23 +3,11 @@ import classes from './TodoNav.module.css'
 import {NavLink} from 'react-router-dom'
 
 
-const links = [
-  {path: '/', title: 'Authentication', exact: true},
-  {path: '/addToDo', title: 'Add-ToDo', exact: false},
-  {path: '/TodoList', title: 'ToDo-List', exact: false},
-  {path: '/About', title: 'About', exact: false},
-]
-
-const linksNotToken = [
-  {path: '/', title: 'Authentication', exact: true},
-  {path: '/About', title: 'About', exact: false},
-]
 
 class TodoNav extends Component {
-
+  
   renderLinks(){
-    if(this.props.token){
-      return links.map((item, index) => {
+      return this.props.links.map((item, index) => {
         return (
           <li className="nav-item" key={index + item.title}>
           <NavLink 
@@ -33,22 +21,6 @@ class TodoNav extends Component {
           </li>
         )
       })
-    } else {
-      return linksNotToken.map((item, index) => {
-        return (
-          <li className="nav-item" key={index + item.title}>
-          <NavLink 
-          className="nav-link" 
-          to={item.path}
-          exact={item.exact}
-          activeClassName="active"
-          >
-          {item.title}<span className="sr-only">(current)</span>
-          </NavLink>
-          </li>
-        )
-      })
-    }
   }
 
 
