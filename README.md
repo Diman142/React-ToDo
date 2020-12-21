@@ -1,6 +1,6 @@
 You can test this project here https://react-todo-b0a36.web.app/addToDo
 
-In this project I use class and function components for getiing practice of usage both types of component
+In this project I used class and functional components for getiing practice of usage both types of component
 
 ## To this project I am using next instruments:
 1) React<br />
