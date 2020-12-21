@@ -1,26 +1,27 @@
-import React, {useState, useEffect} from 'react';
-import { BrowserRouter, Route, Switch} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from './hoc/layout/layout'
 import TodoNav from './containers/TodoNav/TodoNav'
 import AddTodo from './containers/AddTodo/AddTodo'
-import {TodoList} from './containers/TodoList/TodoList'
-import {Auth} from './containers/Auth/Auth'
-import {AlertContext ,alerts} from './context/AlertContext/AlertContext'
-import {Logout} from './components/Logout/Logout'
-import {About} from './containers/About/About'
+import { TodoList } from './containers/TodoList/TodoList'
+import { Auth } from './containers/Auth/Auth'
+import { AlertContext, alerts } from './context/AlertContext/AlertContext'
+import { Logout } from './components/Logout/Logout'
+import { About } from './containers/About/About'
 
 const tokenLinks = [
-  {path: '/', title: 'Authentication', exact: true},
-  {path: '/addToDo', title: 'Add-ToDo', exact: false},
-  {path: '/TodoList', title: 'ToDo-List', exact: false},
-  {path: '/About', title: 'About', exact: false},
+  { path: '/', title: 'Authentication', exact: true },
+  { path: '/addToDo', title: 'Add-ToDo', exact: false },
+  { path: '/TodoList', title: 'ToDo-List', exact: false },
+  { path: '/About', title: 'About', exact: false },
 ]
 
 const noTokenLinks = [
-  {path: '/', title: 'Authentication', exact: true},
-  {path: '/About', title: 'About', exact: false},
+  { path: '/', title: 'Authentication', exact: true },
+  { path: '/About', title: 'About', exact: false },
 ]
 
+console.log(2)
 
 function App() {
 
@@ -30,10 +31,10 @@ function App() {
 
   const [redir, setRedir] = useState(false)
 
-  function changeToken(){
+  function changeToken() {
     let token = localStorage.getItem('token')
-    setToken({token: token})
-    if(token){
+    setToken({ token: token })
+    if (token) {
       setlinksArr([...tokenLinks])
       setRedir(false)
     } else {
@@ -44,7 +45,7 @@ function App() {
 
   useEffect(() => {
     let userToken = localStorage.getItem('token')
-    if(userToken && !token){
+    if (userToken && !token) {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
       localStorage.removeItem('expirationDate')
@@ -52,43 +53,43 @@ function App() {
       localStorage.removeItem('userPassword')
     }
   })
-  
-  
-   let routes = (
-     <Switch>
-        {/* <Route path="/addToDo" component={AddTodo}/>
-        <Route path="/TodoList" component={TodoList}/> */}
-        <Route path="/About" component={About}/>
-        <Route path="/" render={(props) => (
-        <Auth {...props} token={token} changeToken={changeToken} exact={true}/>
-        )}/>
-     </Switch>
-   )
-   
 
-   if({token}){
-       routes = (
-         <Switch>
-           <Route path="/addToDo" component={AddTodo}/>
-           <Route path="/TodoList" component={TodoList}/>
-           <Route path="/About" component={About}/>
-           <Route path="/" render={(props) => (
-           <Auth {...props} token={token} changeToken={changeToken} />
-           )}/>
-         </Switch>
-       ) 
-      
-     } 
+
+  let routes = (
+    <Switch>
+      {/* <Route path="/addToDo" component={AddTodo}/>
+        <Route path="/TodoList" component={TodoList}/> */}
+      <Route path="/About" component={About} />
+      <Route path="/" render={(props) => (
+        <Auth {...props} token={token} changeToken={changeToken} exact={true} />
+      )} />
+    </Switch>
+  )
+
+
+  if ({ token }) {
+    routes = (
+      <Switch>
+        <Route path="/addToDo" component={AddTodo} />
+        <Route path="/TodoList" component={TodoList} />
+        <Route path="/About" component={About} />
+        <Route path="/" render={(props) => (
+          <Auth {...props} token={token} changeToken={changeToken} />
+        )} />
+      </Switch>
+    )
+
+  }
 
 
   return (
-    
+
     <AlertContext.Provider value={alerts}>
       <Layout>
         <BrowserRouter>
-        <TodoNav token={token} links={linksArr}/>
-        {token ? <Logout changeToken={changeToken} redir={redir}/> : null}
-        {routes}
+          <TodoNav token={token} links={linksArr} />
+          {token ? <Logout changeToken={changeToken} redir={redir} /> : null}
+          {routes}
         </BrowserRouter>
       </Layout>
     </AlertContext.Provider>

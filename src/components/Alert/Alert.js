@@ -4,12 +4,12 @@ import './Alert.module.css'
 
 export class Alert extends Component {
 
-  render(){
+  render() {
     console.log(this.props)
     // let props = this.props
     // let alertData = this.context
     return (
-      <div className={`alert alert-dismissible ${this.props.alert.type || "alert-warning"}`} style={{top: '-38px'}}>
+      <div className={`alert alert-dismissible ${this.props.alert.type || "alert-warning"}`} style={{ top: '-38px' }}>
         {this.props.alert.text}
         <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={this.props.onClose}>
           &times;

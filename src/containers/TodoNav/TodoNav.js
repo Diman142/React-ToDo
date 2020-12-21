@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import classes from './TodoNav.module.css'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 
 class TodoNav extends Component {
-  
-  renderLinks(){
-      return this.props.links.map((item, index) => {
-        return (
-          <li className="nav-item" key={index + item.title}>
-          <NavLink 
-          className="nav-link" 
-          to={item.path}
-          exact={item.exact}
-          activeClassName="active"
+
+  renderLinks() {
+    return this.props.links.map((item, index) => {
+      return (
+        <li className="nav-item" key={index + item.title}>
+          <NavLink
+            className="nav-link"
+            to={item.path}
+            exact={item.exact}
+            activeClassName="active"
           >
-          {item.title}<span className="sr-only">(current)</span>
+            {item.title}<span className="sr-only">(current)</span>
           </NavLink>
-          </li>
-        )
-      })
+        </li>
+      )
+    })
   }
 
 

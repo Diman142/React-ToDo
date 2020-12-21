@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 
 const app = (
   <React.StrictMode>
-  <App />
+    <App />
   </React.StrictMode>
 )
 

@@ -1,10 +1,7 @@
-.tranlateform{
+.tranlateform {}
 
-
-}
-
-.authForm{
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 60px;
+.authForm {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 60px;
 }

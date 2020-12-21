@@ -1,8 +1,13 @@
-
 @keyframes ldio-4kq9o4x21kh {
-  0% { transform: translate(-50%,-50%) rotate(0deg); }
-  100% { transform: translate(-50%,-50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
+
 .LoaderMain div {
   position: absolute;
   width: 60px;
@@ -11,11 +16,13 @@
   border-top-color: transparent;
   border-radius: 50%;
 }
+
 .LoaderMain div {
   animation: ldio-4kq9o4x21kh 1s linear infinite;
   top: 150px;
   left: 50%;
 }
+
 .Loadingio-spinner-rolling-g2ers7jkj0w {
   width: 200px;
   height: 200px;
@@ -23,12 +30,17 @@
   overflow: hidden;
   background: #f1f2f3;
 }
+
 .LoaderMain {
   width: 100%;
   height: 100%;
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0;
+  /* see note above */
 }
-.LoaderMain div { box-sizing: content-box; }
+
+.LoaderMain div {
+  box-sizing: content-box;
+}

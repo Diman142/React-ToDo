@@ -1,5 +1,5 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 export const Logout = (props) => {
@@ -16,12 +16,12 @@ export const Logout = (props) => {
 
   return (
     <div>
-    {props.redir ? <Redirect to={"/"}/> 
-    :
-    <div className={`d-flex justify-content-end`}>
-      <button className="btn btn-danger" onClick={Logout}>Выйти</button>
-    </div>
-    }
+      {props.redir ? <Redirect to={"/"} />
+        :
+        <div className={`d-flex justify-content-end`}>
+          <button className="btn btn-danger" onClick={Logout}>Выйти</button>
+        </div>
+      }
     </div>
   )
 }

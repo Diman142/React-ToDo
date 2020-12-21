@@ -4,7 +4,7 @@ import classes from './ModalDialog.module.css'
 
 
 export class ModalDialog extends Component {
-  
+
   state = {
     open: false,
     callback: null
@@ -41,7 +41,7 @@ export class ModalDialog extends Component {
         {this.state.open && (
           <Dialog aria-label="Warning about next steps">
             <div className={classes.ModalDialog}>
-              <div className="modal" style={{display: 'block'}}>
+              <div className="modal" style={{ display: 'block' }}>
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">

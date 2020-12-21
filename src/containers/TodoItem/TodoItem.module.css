@@ -1,15 +1,15 @@
 .hide {
-    display: none;
+  display: none;
 }
 
-.closeTodo{
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    
+.closeTodo {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+
 }
 
-.closeTodo:focus{
-    outline: none;
-    color: #000;
+.closeTodo:focus {
+  outline: none;
+  color: #000;
 }
