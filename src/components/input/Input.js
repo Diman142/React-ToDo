@@ -14,7 +14,6 @@ export const Input = props => {
     cls.push(classes.invalid)
   }
 
-
   return (
     <div className={cls.join(' ')}>
       <label htmlFor={htmlFor}>{props.label}</label>
@@ -23,6 +22,7 @@ export const Input = props => {
         id={htmlFor}
         value={props.value}
         onChange={props.onChange}
+        autoComplete={false}
       />
 
       {

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from './hoc/layout/layout'
@@ -21,8 +22,6 @@ const noTokenLinks = [
   { path: '/About', title: 'About', exact: false },
 ]
 
-console.log(2)
-
 function App() {
 
   const [token, setToken] = useState(null)
@@ -32,8 +31,9 @@ function App() {
   const [redir, setRedir] = useState(false)
 
   function changeToken() {
-    let token = localStorage.getItem('token')
-    setToken({ token: token })
+    // eslint-disable-next-line no-shadow
+    const token = localStorage.getItem('token')
+    setToken({ token })
     if (token) {
       setlinksArr([...tokenLinks])
       setRedir(false)
@@ -44,7 +44,7 @@ function App() {
   }
 
   useEffect(() => {
-    let userToken = localStorage.getItem('token')
+    const userToken = localStorage.getItem('token')
     if (userToken && !token) {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
@@ -54,18 +54,19 @@ function App() {
     }
   })
 
-
   let routes = (
     <Switch>
       {/* <Route path="/addToDo" component={AddTodo}/>
         <Route path="/TodoList" component={TodoList}/> */}
       <Route path="/About" component={About} />
-      <Route path="/" render={(props) => (
-        <Auth {...props} token={token} changeToken={changeToken} exact={true} />
-      )} />
+      <Route
+        path="/"
+        render={(props) => (
+          <Auth {...props} token={token} changeToken={changeToken} exact />
+        )}
+      />
     </Switch>
   )
-
 
   if ({ token }) {
     routes = (
@@ -73,17 +74,18 @@ function App() {
         <Route path="/addToDo" component={AddTodo} />
         <Route path="/TodoList" component={TodoList} />
         <Route path="/About" component={About} />
-        <Route path="/" render={(props) => (
-          <Auth {...props} token={token} changeToken={changeToken} />
-        )} />
+        <Route
+          path="/"
+          render={(props) => (
+            <Auth {...props} token={token} changeToken={changeToken} />
+          )}
+        />
       </Switch>
     )
 
   }
 
-
   return (
-
     <AlertContext.Provider value={alerts}>
       <Layout>
         <BrowserRouter>

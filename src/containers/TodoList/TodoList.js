@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react'
 import axios from 'axios'
 import { TodoItem } from '../TodoItem/TodoItem'
@@ -6,6 +8,7 @@ import { Alert } from '../../components/Alert/Alert'
 import { AlertContext } from '../../context/AlertContext/AlertContext'
 
 export class TodoList extends Component {
+  // eslint-disable-next-line react/static-property-placement
   static contextType = AlertContext
 
 
@@ -28,23 +31,10 @@ export class TodoList extends Component {
   }
 
 
-  toggleModal() {
-    this.setState({ isModalOpen: !this.state.isModalOpen })
-  }
-
-  toggleAlertSuccess() {
-    this.setState({ isAlertSuccess: !this.state.isAlertSuccess })
-  }
-
-  toggleAlertFailure() {
-    this.setState({ isAlertFailure: !this.state.isAlertFailure })
-  }
-
-
   async componentDidMount() {
     try {
-      let userId = localStorage.getItem('userId')
-      let token = localStorage.getItem('token')
+      const userId = localStorage.getItem('userId')
+      const token = localStorage.getItem('token')
       const response = await axios.get(`https://react-todo-b0a36.firebaseio.com/${userId}.json?auth=${token}`)
       const items = []
       if (response.data) {
@@ -59,19 +49,31 @@ export class TodoList extends Component {
     }
   }
 
-  deleteHandler(items) {
-    this.setState({ items: items })
-  }
-
   getItem(items) {
     if (items.length) {
-      return items.map((item, index) => {
-        return <TodoItem header={item.header} descr={item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items} toggleModal={this.toggleModal} toggleAlertSuccess={this.toggleAlertSuccess} toggleAlertFailure={this.toggleAlertFailure} deadlineDate={item.deadlineDate} deadlineTime={item.deadlineTime} />
-      })
-    } else {
-      return <div style={{ width: '100%' }} className="alert alert-primary mt-4">На данный момент у вас нет задач. Добавьте задачи во вкладке "Add-ToDo"</div>
+      // eslint-disable-next-line react/no-array-index-key
+      return items.map((item, index) => <TodoItem header={item.header} descr={item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items} toggleModal={this.toggleModal} toggleAlertSuccess={this.toggleAlertSuccess} toggleAlertFailure={this.toggleAlertFailure} deadlineDate={item.deadlineDate} deadlineTime={item.deadlineTime} />)
     }
+    return <div style={{ width: '100%' }} className="alert alert-primary mt-4">На данный момент у вас нет задач. Добавьте задачи во вкладке "Add-ToDo"</div>
+
   }
+
+  deleteHandler(items) {
+    this.setState({ items })
+  }
+
+  toggleModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen })
+  }
+
+  toggleAlertSuccess() {
+    this.setState({ isAlertSuccess: !this.state.isAlertSuccess })
+  }
+
+  toggleAlertFailure() {
+    this.setState({ isAlertFailure: !this.state.isAlertFailure })
+  }
+
 
   render() {
     const alertData = this.context
@@ -82,9 +84,11 @@ export class TodoList extends Component {
         <h2 className="mt-4 text-center">Todo-List</h2>
         {
           this.state.loading ? <Loader />
-            : <ul className="pl-0 row">
-              {this.getItem(this.state.items)}
-            </ul>
+            : (
+              <ul className="pl-0 row">
+                {this.getItem(this.state.items)}
+              </ul>
+            )
         }
       </div>
     )

@@ -5,20 +5,23 @@ import classes from './ModalDialog.module.css'
 
 export class ModalDialog extends Component {
 
-  state = {
-    open: false,
-    callback: null
+  constructor() {
+    super()
+
+    this.state = {
+      open: false,
+      callback: null
+    }
   }
 
   show = callback => event => {
     event.preventDefault()
 
+    // eslint-disable-next-line no-param-reassign
     event = {
       ...event,
       target: { ...event.target, value: event.target.value }
     }
-
-    console.log(event)
 
     this.setState({
       open: true,
@@ -35,7 +38,7 @@ export class ModalDialog extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {this.props.children(this.show)}
 
         {this.state.open && (
@@ -60,7 +63,7 @@ export class ModalDialog extends Component {
             </div>
           </Dialog>
         )}
-      </React.Fragment>
+      </>
     )
   }
 }

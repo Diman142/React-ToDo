@@ -7,7 +7,6 @@ function isInvalid(touched, valid) {
 }
 
 export function DateInput(props) {
-
   return (
     <div className="form-group">
       <label htmlFor={props.id}>{props.label}</label>

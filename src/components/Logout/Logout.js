@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 export const Logout = (props) => {
 
-  function Logout() {
+  function logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     localStorage.removeItem('expirationDate')
@@ -13,15 +13,14 @@ export const Logout = (props) => {
     props.changeToken()
   }
 
-
   return (
     <div>
-      {props.redir ? <Redirect to={"/"} />
-        :
-        <div className={`d-flex justify-content-end`}>
-          <button className="btn btn-danger" onClick={Logout}>Выйти</button>
-        </div>
-      }
+      {props.redir ? <Redirect to="/" />
+        : (
+          <div className="d-flex justify-content-end">
+            <button type="button" className="btn btn-danger" onClick={logout}>Выйти</button>
+          </div>
+        )}
     </div>
   )
 }

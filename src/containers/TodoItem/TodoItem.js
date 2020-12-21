@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 import React, { useState } from 'react';
-import classes from './TodoItem.module.css'
 import axios from 'axios'
 import { ModalDialog } from '../../components/ModalDialog/ModalDialog'
+import classes from './TodoItem.module.css'
 
 
 export function TodoItem(props) {
@@ -14,16 +15,10 @@ export function TodoItem(props) {
   const [deadlineSeconds, setDeadlineSeconds] = useState(null)
   const [timerFlag, setTimerFlag] = useState(true)
 
-  function completeTask(event) {
-    console.log(props)
-    let parent = event.target.parentNode
-    parent.style.opacity = 0.5;
-    setDisabledBtn(!disabledBtn);
-    changeState()
-  }
+
 
   function backTask(event) {
-    let parent = event.target.parentNode
+    const parent = event.target.parentNode
     parent.style.opacity = 1;
     setDisabledBtn(!disabledBtn);
   }
@@ -31,6 +26,7 @@ export function TodoItem(props) {
   function changeState(id) {
     if (props.items.length) {
       let itemData = [...props.items]
+      // eslint-disable-next-line array-callback-return
       itemData = itemData.filter(item => {
         if (+item.id !== +id) {
           return item
@@ -43,11 +39,19 @@ export function TodoItem(props) {
     }
   }
 
+  function completeTask(event) {
+    console.log(props)
+    const parent = event.target.parentNode
+    parent.style.opacity = 0.5;
+    setDisabledBtn(!disabledBtn);
+    changeState()
+  }
+
   function getDateComponent(deadline) {
-    let days = Math.floor(deadline / (1000 * 60 * 60 * 24))
-    let hours = Math.floor((deadline / (1000 * 60 * 60)) % 24)
-    let minutes = Math.floor((deadline / 1000 / 60) % 60)
-    let seconds = Math.floor((deadline / 1000) % 60)
+    const days = Math.floor(deadline / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((deadline / (1000 * 60 * 60)) % 24)
+    const minutes = Math.floor((deadline / 1000 / 60) % 60)
+    const seconds = Math.floor((deadline / 1000) % 60)
 
     return {
       days, hours, minutes, seconds
@@ -55,23 +59,21 @@ export function TodoItem(props) {
 
   }
 
-
-
   function getDeadline(date, time) {
-    let dateElems = date.split('-')
-    let timeElems = time.split(':')
+    const dateElems = date.split('-')
+    const timeElems = time.split(':')
     const deadline = new Date(dateElems[2], dateElems[1] - 1, dateElems[0], timeElems[0], timeElems[1]);
     let delay = 5;
 
     const deadlineTimer = setInterval(() => {
-      let endTime = deadline - new Date()
+      const endTime = deadline - new Date()
       if (endTime <= 0) {
         setTimerFlag(false)
         clearInterval(deadlineTimer)
       } else {
         setTimerFlag(true)
 
-        let timeComponent = getDateComponent(endTime)
+        const timeComponent = getDateComponent(endTime)
 
         setDeadlineDay(timeComponent.days)
         setDeadlineHour(timeComponent.hours)
@@ -86,13 +88,13 @@ export function TodoItem(props) {
   async function deleteItem(event) {
     const id = Object.values({ ...event.target })[1].deleteid
     changeState(id);
-    let userId = localStorage.getItem('userId')
-    let token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
+    const token = localStorage.getItem('token')
     const url = `https://react-todo-b0a36.firebaseio.com/${userId}/`;
     const response = await axios.get(`${url}.json?auth=${token}`)
     try {
       let deleteKey = ""
-      let keys = Object.keys(response.data)
+      const keys = Object.keys(response.data)
       keys.forEach(item => {
         if (+response.data[item].id === +id) {
           deleteKey = item
@@ -119,8 +121,8 @@ export function TodoItem(props) {
               {timerFlag ? `До дедлайна: ${deadlineDay} дней ${deadlineHour} ч. ${deadlineMinutes} мин. ${deadlineSeconds} сек.` : 'Срок выполнения задачи истёк'}
             </small>
           </p>
-          <button className="btn btn-primary mr-2" onClick={completeTask} disabled={!disabledBtn}>Завершить</button>
-          <button style={{ backgroundColor: "red" }} className="btn btn-danger" onClick={backTask} disabled={disabledBtn}>Вернуться</button>
+          <button type="button" className="btn btn-primary mr-2" onClick={completeTask} disabled={!disabledBtn}>Завершить</button>
+          <button type="button" style={{ backgroundColor: "red" }} className="btn btn-danger" onClick={backTask} disabled={disabledBtn}>Вернуться</button>
           <button type="button" className={`close ${classes.closeTodo}`} onClick={confirm((event) => { deleteItem(event) })} deleteid={props.id}>&times;</button>
         </li>
       )}
