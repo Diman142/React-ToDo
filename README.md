@@ -1,5 +1,7 @@
 You can test this project here https://react-todo-b0a36.web.app/addToDo
 
+In this project I use class and function components for getiing practice if using both types of component
+
 ## To this project I am using next instruments:
 1) React<br />
 2) React-router-dom<br />
