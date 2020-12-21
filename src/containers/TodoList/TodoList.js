@@ -41,13 +41,10 @@ export class TodoList extends Component {
   }
 
 
-
-
   async componentDidMount() {
     try {
       let userId = localStorage.getItem('userId')
       let token = localStorage.getItem('token')
-      console.log(token)
       const response = await axios.get(`https://react-todo-b0a36.firebaseio.com/${userId}.json?auth=${token}`)
       const items = []
       if(response.data){
@@ -69,7 +66,7 @@ export class TodoList extends Component {
 getItem(items){
   if(items.length){
     return items.map((item, index) => {
-      return <TodoItem header = {item.header} descr = {item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items} toggleModal={this.toggleModal} toggleAlertSuccess={this.toggleAlertSuccess} toggleAlertFailure={this.toggleAlertFailure}/>
+      return <TodoItem header = {item.header} descr = {item.descr} key={index + item.header} id={item.id} deleteHandler={this.deleteHandler} items={this.state.items} toggleModal={this.toggleModal} toggleAlertSuccess={this.toggleAlertSuccess} toggleAlertFailure={this.toggleAlertFailure} deadlineDate={item.deadlineDate} deadlineTime={item.deadlineTime}/>
     }) 
   } else {
     return <div style={{width: '100%'}} className="alert alert-primary mt-4">На данный момент у вас нет задач. Добавьте задачи во вкладке "Add-ToDo"</div>

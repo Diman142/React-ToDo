@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Route, Switch} from "react-router-dom";
 import Layout from './hoc/layout/layout'
 import TodoNav from './containers/TodoNav/TodoNav'
@@ -41,39 +41,44 @@ function App() {
       setRedir(true)
     }
   }
+
+  useEffect(() => {
+    let userToken = localStorage.getItem('token')
+    if(userToken && !token){
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('expirationDate')
+      localStorage.removeItem('userEmail')
+      localStorage.removeItem('userPassword')
+    }
+  })
   
   
-  // let routes = (
-  //   <Switch>
-  //      <Route path="/addToDo" component={AddTodo}/>
-  //      <Route path="/TodoList" component={TodoList}/>
-  //      <Route path="/About" component={About}/>
-  //      <Route path="/" render={(props) => (
-  //      <Auth {...props} token={token} changeToken={changeToken}/>
-  //      )}/>
-  //   </Switch>
-  // )
+   let routes = (
+     <Switch>
+        {/* <Route path="/addToDo" component={AddTodo}/>
+        <Route path="/TodoList" component={TodoList}/> */}
+        <Route path="/About" component={About}/>
+        <Route path="/" render={(props) => (
+        <Auth {...props} token={token} changeToken={changeToken} exact={true}/>
+        )}/>
+     </Switch>
+   )
+   
 
-  // useEffect(() => {
-    
-  //   return function test(){
-  //     if(token){
-  //       routes = (
-  //         <Switch>
-  //           <Route path="/addToDo" component={AddTodo}/>
-  //           <Route path="/TodoList" component={TodoList}/>
-  //           <Route path="/About" component={About}/>
-  //           <Route path="/" render={(props) => (
-  //           <Auth {...props} token={token} changeToken={changeToken}/>
-  //           )}/>
-  //         </Switch>
-  //       ) 
-  //     } 
-  //   }
-  // }, [token])
-
-
-
+   if({token}){
+       routes = (
+         <Switch>
+           <Route path="/addToDo" component={AddTodo}/>
+           <Route path="/TodoList" component={TodoList}/>
+           <Route path="/About" component={About}/>
+           <Route path="/" render={(props) => (
+           <Auth {...props} token={token} changeToken={changeToken} />
+           )}/>
+         </Switch>
+       ) 
+      
+     } 
 
 
   return (
@@ -83,14 +88,7 @@ function App() {
         <BrowserRouter>
         <TodoNav token={token} links={linksArr}/>
         {token ? <Logout changeToken={changeToken} redir={redir}/> : null}
-        <Switch>
-            <Route path="/addToDo" component={AddTodo}/>
-            <Route path="/TodoList" component={TodoList}/>
-            <Route path="/About" component={About}/>
-            <Route path="/" render={(props) => (
-            <Auth {...props} token={token} changeToken={changeToken}/>
-            )}/>
-          </Switch>
+        {routes}
         </BrowserRouter>
       </Layout>
     </AlertContext.Provider>
