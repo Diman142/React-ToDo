@@ -60,7 +60,8 @@ export function TodoItem(props) {
   function getDeadline(date, time){
     let dateElems = date.split('-')
     let timeElems = time.split(':')
-    const deadline = new Date(dateElems[2], dateElems[1] - 1, dateElems[0], timeElems[0], timeElems[1])
+    const deadline = new Date(dateElems[2], dateElems[1] - 1, dateElems[0], timeElems[0], timeElems[1]);
+    let delay = 5;
 
     const deadlineTimer = setInterval(() => {
       let endTime = deadline - new Date()
@@ -77,7 +78,8 @@ export function TodoItem(props) {
         setDeadlineMinutes(timeComponent.minutes)
         setDeadlineSeconds(timeComponent.seconds)
       }
-    }, 1000)
+      delay = 1000
+    }, delay)
 
   }
 
