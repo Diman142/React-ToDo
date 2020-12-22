@@ -1,6 +1,8 @@
 import React from 'react'
 import classes from './Input.module.css'
 
+// Custom input component with validation
+
 function isInvalid({ valid, touched, shouldValidate }) {
   return !valid && shouldValidate && touched
 }

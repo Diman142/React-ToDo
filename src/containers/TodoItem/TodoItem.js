@@ -5,10 +5,11 @@ import { ModalDialog } from '../../components/ModalDialog/ModalDialog'
 import classes from './TodoItem.module.css'
 
 
+// Component of todo with deadline function and deletintin confirmation
+
 export function TodoItem(props) {
 
   const [disabledBtn, setDisabledBtn] = useState(true)
-
   const [deadlineDay, setDeadlineDay] = useState(null)
   const [deadlineHour, setDeadlineHour] = useState(null)
   const [deadlineMinutes, setDeadlineMinutes] = useState(null)
@@ -40,7 +41,6 @@ export function TodoItem(props) {
   }
 
   function completeTask(event) {
-    console.log(props)
     const parent = event.target.parentNode
     parent.style.opacity = 0.5;
     setDisabledBtn(!disabledBtn);
@@ -103,7 +103,6 @@ export function TodoItem(props) {
       await axios.delete(`${url + deleteKey}.json?auth=${token}`)
       props.toggleAlertSuccess()
     } catch (e) {
-      console.error(e)
       props.toggleAlertFailure()
     }
   }

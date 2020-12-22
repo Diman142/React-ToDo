@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+
+// Alert component. I used this component in difernt part of app.
+// To solve this problem, I used the context
+
 export class Alert extends Component {
 
   render() {

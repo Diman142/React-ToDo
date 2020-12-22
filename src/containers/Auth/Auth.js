@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import is from 'is_js'
 import axios from 'axios'
-import { Input } from '../../components/input/Input'
+import { Input } from '../../components/Input/Input'
 import { Loader } from '../../components/Loader/Loader'
 import { AlertContext } from '../../context/AlertContext/AlertContext'
 import { Alert } from '../../components/Alert/Alert'
 import classes from './Auth.module.css'
+
+
+// Auth and registration module with refresh token function and validation for registratinon and auth I used 2 different forms.
+// So I was able to work with them as independent components.
+// I Saved Api Key here to simplify task
 
 const apiKey = "AIzaSyAh2nPlAriQ0IBV70W13cVzRPrYAfO_JY0";
 
@@ -51,7 +56,6 @@ export class Auth extends Component {
         }
       }
     }
-
     this.getForm = this.getForm.bind(this)
   }
 
@@ -112,7 +116,6 @@ export class Auth extends Component {
     return null
   }
 
-
   getForm() {
     if (this.state.formFlag) {
       return (
@@ -164,8 +167,7 @@ export class Auth extends Component {
           regSuccess: true,
         })
       })
-      .catch((e) => {
-        console.error(e)
+      .catch(() => {
         this.setState({
           loading: false,
           regFailure: true
@@ -203,8 +205,7 @@ export class Auth extends Component {
           authSuccess: true
         })
       })
-      .catch((e) => {
-        console.error(e)
+      .catch(() => {
         this.setState({
           loading: false,
           authFailure: true
@@ -302,12 +303,10 @@ export class Auth extends Component {
 
 
   render() {
-
     return (
       <div>
         {this.getForm()}
       </div>
-
     )
   }
 }

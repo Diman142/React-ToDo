@@ -9,6 +9,9 @@ import { Alert } from '../../components/Alert/Alert'
 import { DateInput } from '../../components/DataInput/DataInput'
 import classes from './AddTodo.module.css'
 
+
+// Form for adding todos/ Realized adding deleting and validation functions
+
 class AddTodo extends Component {
   // eslint-disable-next-line react/static-property-placement
   static contextType = AlertContext
@@ -75,8 +78,7 @@ class AddTodo extends Component {
           descrValue: '',
         })
       })
-      .catch((error) => {
-        console.error(error)
+      .catch(() => {
         this.setState({
           loading: false,
           failure: true,

@@ -7,6 +7,9 @@ import { Loader } from '../../components/Loader/Loader'
 import { Alert } from '../../components/Alert/Alert'
 import { AlertContext } from '../../context/AlertContext/AlertContext'
 
+
+// Use class component for practice with this types of component
+
 export class TodoList extends Component {
   // eslint-disable-next-line react/static-property-placement
   static contextType = AlertContext
@@ -23,13 +26,11 @@ export class TodoList extends Component {
       isAlertFailure: false,
     }
 
-
     this.toggleAlertSuccess = this.toggleAlertSuccess.bind(this)
     this.toggleAlertFailure = this.toggleAlertFailure.bind(this)
     this.deleteHandler = this.deleteHandler.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
-
 
   async componentDidMount() {
     try {
