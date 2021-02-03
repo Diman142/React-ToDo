@@ -1,4 +1,4 @@
-You can test this project here https://react-todo-b0a36.web.app/addToDo
+You can test this project here https://react-todo-b0a36.web.app
 
 In this project I used class and functional components for getiing practice of usage both types of components
 
